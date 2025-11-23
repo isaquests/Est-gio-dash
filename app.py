@@ -5,9 +5,9 @@ import numpy as np
 import plotly.express as px
 
 
-st.set_page_config(page_title="Dashboard Ovinos - Cooperativa", layout="wide")
+st.set_page_config(page_title="Dashboard COOPPRAS", layout="wide")
 
-st.title("Dashboard de Análise — Cooperativa de Produtores de Ovinos")
+st.title("Dashboard dos Produtores de Ovinos")
 st.markdown("")
 
 
