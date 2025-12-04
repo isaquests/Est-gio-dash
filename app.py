@@ -12,7 +12,7 @@ st.set_page_config(page_title="Dashboard Cooppras", layout="wide")
 logo_url = "https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.png"
 
 st.markdown(
-    f"""
+    """
     <style>
         .header-logo {
             position: absolute;
@@ -21,6 +21,7 @@ st.markdown(
             width: 120px;
             z-index: 100;
         }
+
         .center-title {
             text-align: center;
             margin-top: 40px;
@@ -43,15 +44,14 @@ st.markdown(
     <img src="https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.png" class="header-logo" />
 
     <div class="center-title">
-        <h1 class="main-title">Dashboard dos Produtores de Ovinos</h1>
+        <h1 class="main-title">DASHBORD DOS PRODUTORES DE OVINOS</h1>
         <div class="subtitle">Análise econômica e produtiva da COOPIPRAS</div>
     </div>
 
-    <br></br>
+    <br>
     """,
     unsafe_allow_html=True
 )
-
 
 # 1. Carregar dados
 
