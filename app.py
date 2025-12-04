@@ -4,12 +4,16 @@ import matplotlib.pyplot as plt
 import numpy as np
 import plotly.express as px
 
+st.set_page_config(page_title="Dashboard Ovinos - Cooperativa", layout="wide")
 
-st.set_page_config(page_title="Dashboard COOPPRAS", layout="wide")
-
-st.title("Dashboard dos Produtores de Ovinos")
-st.markdown("")
-
+st.markdown(
+    """
+    <h1 style='text-align: center; color: #4A4A4A;'>
+        Dashboard dos Produtores de Ovinos
+    </h1>
+    """,
+    unsafe_allow_html=True
+)
 
 # 1. Carregar dados
 
