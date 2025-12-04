@@ -61,7 +61,7 @@ fig3 = px.box(
 st.plotly_chart(fig3, use_container_width=True)
 
 # 6. Correlação: Número de Animais x Lucro Bruto
-st.subheader("📈 Correlação: Quantidade de Animais x Lucro Bruto")
+st.subheader("📈 Dispersão: quantidade de animais vs lucro bruto")
 
 fig4 = px.scatter(
     df,
