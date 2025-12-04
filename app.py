@@ -8,20 +8,48 @@ import plotly.express as px
 st.set_page_config(page_title="Dashboard Cooppras", layout="wide")
 
 logo_url = "https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.png"
+
 st.markdown(
-    
-    logo_url = "https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.png"
+    <style>
+    .header-logo {{
+        position: absolute;
+        top: 10px;
+        right: 25px;
+        width: 120px;
+        z-index:100;
+    }}
 
-col_logo, col_title = st.columns([3, 1])
+    .center-title {{
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 0px;
+    }}
 
-with col_title:
-    st.image(logo_url, width=150)
+    .main-title {{
+        font-size: 46px !important;   /* aumenta bem o tamanho */
+        font-weight: 800;
+        color: #1A4D8F;
+        margin-bottom: 5px;
+    }}
 
-with col_logo:
-    st.markdown(
-        "<h3 style='text-align: center; color:#2B6CB0;'>Dashboard dos Produtores de Ovinos</h3>",
-        unsafe_allow_html=True
-    )
+    .subtitle {{
+        font-size: 22px;
+        color: #333;
+        margin-top: -10px;
+        margin-bottom: 20px;
+    }}
+    </style>
+
+    <img src="{logo_url}" class="header-logo" />
+
+    <div class="center-title">
+        <h1 class="main-title">DASHBOARD DOS PRODUTORES DE OVINOS</h1>
+        <div class="subtitle">Análise econômica e produtiva da COOPIPRAS</div>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
 
 
 # 1. Carregar dados
