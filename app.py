@@ -4,20 +4,49 @@ import matplotlib.pyplot as plt
 import numpy as np
 import plotly.express as px
 
+# Configuração da página — apenas uma vez
 st.set_page_config(page_title="Dashboard Ovinos - Cooperativa", layout="wide")
 
+logo_url = "https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.png"
 st.markdown(
-    """
-    <h1 style='text-align: center; color: #4A4A4A;'>
-        Dashboard dos Produtores de Ovinos
-    </h1>
+    f"""
+    <style>
+    /* garante que o header não empurre o conteúdo */
+    .header-logo {{
+        position: absolute;
+        top: 10px;
+        right: 25px;
+        width: 110px;
+        z-index:100;
+    }}
+    /* centraliza o título e remove espaçamentos extras */
+    .center-title {{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 10px;
+        margin-bottom: 8px;
+    }}
+    .center-title h1 {{
+        font-size: 34px;
+        color: #2B6CB0;
+        margin: 0;
+        padding: 0;
+        font-weight: 700;
+    }}
+    </style>
+    <img src="{logo_url}" class="header-logo" />
+    <div class="center-title">
+      <h1>Dashboard dos Produtores de Ovinos</h1>
+    </div>
     """,
-    unsafe_allow_html=True
+    unsafe_allow_html=True,
 )
+
 
 # 1. Carregar dados
 
-st.subheader("📥 Carregando Dados")
+st.subheader("Carregando Dados📥")
 
 url = "https://drive.google.com/uc?id=1amRbo-F46eHp28K9SEGfS5vA3RlU70c3"
 
@@ -27,7 +56,7 @@ st.write("Amostra dos dados:")
 st.dataframe(df.head())
 
 # 2. Indicadores gerais
-st.subheader("📌 Indicadores Gerais")
+st.subheader("Indicadores Gerais📌")
 
 col1, col2, col3, col4 = st.columns(4)
 
@@ -38,12 +67,12 @@ col4.metric("Número Médio de Animais", round(df["quantidade_animais"].mean(), 
 
 
 # 3. Distribuição de Sexo
-st.subheader("📊 Distribuição por Sexo")
+st.subheader("Distribuição por Sexo📊")
 fig = px.pie(df, names="sexo", title="Distribuição de Sexo")
 st.plotly_chart(fig, use_container_width=True)
 
 # 4. Nível Tecnológico
-st.subheader("⚙️ Nível Tecnológico dos Produtores")
+st.subheader("Nível Tecnológico dos Produtores⚙️")
 fig2 = px.histogram(
     df,
     x="nivel_tecnologico",
@@ -53,7 +82,7 @@ fig2 = px.histogram(
 st.plotly_chart(fig2, use_container_width=True)
 
 # 5. Lucro Bruto por Sistema de Criação
-st.subheader("💰 Lucro Bruto por Sistema de Criação")
+st.subheader("Lucro Bruto por Sistema de Criação💰")
 
 fig3 = px.box(
     df,
@@ -65,7 +94,7 @@ fig3 = px.box(
 st.plotly_chart(fig3, use_container_width=True)
 
 # 6. Correlação: Número de Animais x Lucro Bruto
-st.subheader("📈 Dispersão: quantidade de animais vs lucro bruto")
+st.subheader("Dispersão: quantidade de animais vs lucro bruto📈")
 
 fig4 = px.scatter(
     df,
@@ -77,7 +106,7 @@ fig4 = px.scatter(
 st.plotly_chart(fig4, use_container_width=True)
 
 # 7. Gastos médios por categoria
-st.subheader("💸 Composição dos Gastos Médios")
+st.subheader("Composição dos Gastos Médios💸")
 
 gastos_cols = ["alimentacao", "remedio_vacina", "mao_de_obra", "energia", "agua", "transporte", "outros_gastos"]
 
@@ -94,7 +123,7 @@ st.plotly_chart(fig5, use_container_width=True)
 
 # 8. Tabela filtrável
 
-st.subheader("🔎 Filtro de Produtores")
+st.subheader("Filtro dos Cooperados🔎")
 
 filtro_sistema = st.selectbox("Selecione o sistema de criação:", df["sistema_criacao"].unique())
 
