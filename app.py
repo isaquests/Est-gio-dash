@@ -45,7 +45,7 @@ st.markdown(
 
     <div class="center-title">
         <h1 class="main-title">DASHBORD DOS PRODUTORES DE OVINOS</h1>
-        <div class="subtitle">Análise econômica e produtiva da COOPIPRAS</div>
+        <div class="subtitle">Análise econômica e produtiva da COOPPRAS</div>
     </div>
 
     <br>
@@ -70,9 +70,9 @@ st.subheader("Indicadores Gerais📌")
 col1, col2, col3, col4 = st.columns(4)
 
 col1.metric("Total de Produtores", df.shape[0])
-col2.metric("Idade Média", round(df["idade"].mean(), 1))
+col2.metric("Idade Média", round(df["idade"].mean(), 0))
 col3.metric("Lucro Bruto Médio (R$)", round(df["lucro_bruto"].mean(), 2))
-col4.metric("Número Médio de Animais", round(df["quantidade_animais"].mean(), 1))
+col4.metric("Número Médio de Animais", round(df["quantidade_animais"].mean(), 0))
 
 
 # 3. Distribuição de Sexo
@@ -85,7 +85,7 @@ st.subheader("Nível Tecnológico dos Produtores⚙️")
 fig2 = px.histogram(
     df,
     x="nivel_tecnologico",
-    color="nivel_tecnologico",
+    color=" ",
     title="Distribuição do Nível Tecnológico",
 )
 st.plotly_chart(fig2, use_container_width=True)
@@ -97,7 +97,7 @@ fig3 = px.box(
     df,
     x="sistema_criacao",
     y="lucro_bruto",
-    color="sistema_criacao",
+    color=" ",
     title="Comparação de Lucro por Sistema de Criação",
 )
 st.plotly_chart(fig3, use_container_width=True)
@@ -107,8 +107,8 @@ st.subheader("Dispersão: quantidade de animais vs lucro bruto📈")
 
 fig4 = px.scatter(
     df,
-    x="quantidade_animais",
-    y="lucro_bruto",
+    x="Quantidade animais",
+    y="Lucro bruto",
     trendline="ols",
     title="Relação entre Número de Animais e Lucro",
 )
@@ -117,10 +117,10 @@ st.plotly_chart(fig4, use_container_width=True)
 # 7. Gastos médios por categoria
 st.subheader("Composição dos Gastos Médios💸")
 
-gastos_cols = ["alimentacao", "remedio_vacina", "mao_de_obra", "energia", "agua", "transporte", "outros_gastos"]
+gastos_cols = ["alimentacao", "remedio", "mão de obra", "energia", "água", "transporte", "outros"]
 
 gastos_medios = df[gastos_cols].mean().reset_index()
-gastos_medios.columns = ["categoria", "valor"]
+gastos_medios.columns = [" ", "valor"]
 
 fig5 = px.bar(
     gastos_medios,
