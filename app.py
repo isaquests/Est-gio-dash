@@ -5,21 +5,21 @@ import numpy as np
 import plotly.express as px
 
 # Configuração da página — apenas uma vez
-st.set_page_config(page_title="Dashboard Ovinos - Cooperativa", layout="wide")
+st.set_page_config(page_title="Dashboard Cooppras", layout="wide")
 
 logo_url = "https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.png"
 st.markdown(
-    f"""
+    
     logo_url = "https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.png"
 
 col_logo, col_title = st.columns([3, 1])
 
 with col_title:
-    st.image(logo_url, width=120)
+    st.image(logo_url, width=150)
 
 with col_logo:
     st.markdown(
-        "<h1 style='text-align: center; color:#2B6CB0;'>Dashboard dos Produtores de Ovinos</h1>",
+        "<h3 style='text-align: center; color:#2B6CB0;'>Dashboard dos Produtores de Ovinos</h3>",
         unsafe_allow_html=True
     )
 
