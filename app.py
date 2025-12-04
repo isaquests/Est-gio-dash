@@ -45,7 +45,7 @@ st.markdown(
 
     <div class="center-title">
         <h1 class="main-title">DASHBORD DOS PRODUTORES DE OVINOS</h1>
-        <div class="subtitle">Análise econômica e produtiva da COOPPRAS</div>
+        <div class="subtitle">Análise econômica e produtiva da COOPIPRAS</div>
     </div>
 
     <br>
@@ -107,8 +107,8 @@ st.subheader("Dispersão: quantidade de animais vs lucro bruto📈")
 
 fig4 = px.scatter(
     df,
-    x="Quantidade animais",
-    y="Lucro bruto",
+    x="quantidade_animais",
+    y="lucro_bruto",
     trendline="ols",
     title="Relação entre Número de Animais e Lucro",
 )
@@ -117,10 +117,10 @@ st.plotly_chart(fig4, use_container_width=True)
 # 7. Gastos médios por categoria
 st.subheader("Composição dos Gastos Médios💸")
 
-gastos_cols = ["alimentacao", "remedio", "mão de obra", "energia", "água", "transporte", "outros"]
+gastos_cols = ["alimentacao", "remedio_vacina", "mao_de_obra", "energia", "agua", "transporte", "outros_gastos"]
 
 gastos_medios = df[gastos_cols].mean().reset_index()
-gastos_medios.columns = [" ", "valor"]
+gastos_medios.columns = ["categoria", "valor"]
 
 fig5 = px.bar(
     gastos_medios,
