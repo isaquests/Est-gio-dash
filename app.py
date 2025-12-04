@@ -10,38 +10,18 @@ st.set_page_config(page_title="Dashboard Ovinos - Cooperativa", layout="wide")
 logo_url = "https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.png"
 st.markdown(
     f"""
-    <style>
-    /* garante que o header não empurre o conteúdo */
-    .header-logo {{
-        position: absolute;
-        top: 10px;
-        right: 25px;
-        width: 110px;
-        z-index:100;
-    }}
-    /* centraliza o título e remove espaçamentos extras */
-    .center-title {{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 10px;
-        margin-bottom: 8px;
-    }}
-    .center-title h1 {{
-        font-size: 34px;
-        color: #2B6CB0;
-        margin: 0;
-        padding: 0;
-        font-weight: 700;
-    }}
-    </style>
-    <img src="{logo_url}" class="header-logo" />
-    <div class="center-title">
-      <h1>Dashboard dos Produtores de Ovinos</h1>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+    logo_url = "https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.png"
+
+col_logo, col_title = st.columns([3, 1])
+
+with col_title:
+    st.image(logo_url, width=120)
+
+with col_logo:
+    st.markdown(
+        "<h1 style='text-align: center; color:#2B6CB0;'>Dashboard dos Produtores de Ovinos</h1>",
+        unsafe_allow_html=True
+    )
 
 
 # 1. Carregar dados
