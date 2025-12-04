@@ -4,13 +4,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 import plotly.express as px
 
-# Configuração da página — apenas uma vez
 st.set_page_config(page_title="Dashboard Cooppras", layout="wide")
 
 logo_url = "https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.png"
 
 st.markdown(
-    """
+    f"""
     <style>
         .header-logo {
             position: absolute;
