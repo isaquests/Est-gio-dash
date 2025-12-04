@@ -84,8 +84,8 @@ st.plotly_chart(fig, use_container_width=True)
 st.subheader("Nível Tecnológico dos Produtores⚙️")
 fig2 = px.histogram(
     df,
-    x="nivel_tecnologico",
-    color=" ",
+    x="nivel tecnologico",
+    color="nivel_tecnologico",
     title="Distribuição do Nível Tecnológico",
 )
 st.plotly_chart(fig2, use_container_width=True)
@@ -95,9 +95,9 @@ st.subheader("Lucro Bruto por Sistema de Criação💰")
 
 fig3 = px.box(
     df,
-    x="sistema_criacao",
+    x="sistema criacao",
     y="lucro_bruto",
-    color=" ",
+    color="sistema_criacao",
     title="Comparação de Lucro por Sistema de Criação",
 )
 st.plotly_chart(fig3, use_container_width=True)
