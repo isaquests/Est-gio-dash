@@ -44,7 +44,7 @@ st.markdown(
         <div class="subtitle">Análise econômica e produtiva da COOPIPRAS</div>
     </div>
 
-    <br><br>
+    <br></br>
     """,
     unsafe_allow_html=True
 )
