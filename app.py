@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import plotly.express as px
 
-st.write("VERSÃO TESTE 1")
 
 
 st.set_page_config(page_title="Dashboard Cooppras", layout="wide")
