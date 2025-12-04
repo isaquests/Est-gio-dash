@@ -69,10 +69,11 @@ st.subheader("Indicadores Gerais📌")
 
 col1, col2, col3, col4 = st.columns(4)
 
-col1.metric("Total de Produtores", df.shape[0])
-col2.metric("Idade Média", round(df["idade"].mean(), 0))
+col1.metric("Total de Cooperados", df.shape[0])
+col2.metric("Idade Média", int(df["idade"].mean()))
 col3.metric("Lucro Bruto Médio (R$)", round(df["lucro_bruto"].mean(), 2))
-col4.metric("Número Médio de Animais", round(df["quantidade_animais"].mean(), 0))
+col4.metric("Número Médio de Animais", int(df["quantidade_animais"].mean()))
+
 
 
 # 3. Distribuição de Sexo
