@@ -56,7 +56,8 @@ st.markdown(
 
 st.subheader("Carregando Dados📥")
 
-url = "https://drive.google.com/uc?id=1amRbo-F46eHp28K9SEGfS5vA3RlU70c3"
+#url = "https://drive.google.com/uc?id=1amRbo-F46eHp28K9SEGfS5vA3RlU70c3"     _db teste
+url = "https://drive.google.com/uc?export=download&id=1MDnGi2vlIc56UQCbJJIt_Zn1Iu-3wmzS"
 
 df = pd.read_csv(url, sep=";")
 
