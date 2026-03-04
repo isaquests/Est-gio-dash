@@ -141,3 +141,6 @@ df_filtrado = df[df["sistema_criacao"] == filtro_sistema]
 
 st.write(f"Produtores que usam o sistema: **{filtro_sistema}**")
 st.dataframe(df_filtrado)
+
+clicked = st.button("Clique aqui")
+
