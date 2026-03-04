@@ -4,16 +4,16 @@ import matplotlib.pyplot as plt
 import numpy as np
 import plotly.express as px
 
-
+# https://drive.google.com/uc?export=download&id=1MDnGi2vlIc56UQCbJJIt_Zn1Iu-3wmzS    colocar abaixo de style
 
 st.set_page_config(page_title="Dashboard Cooppras", layout="wide")
 
 logo_url = "https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.png"
 
 st.markdown(
-    """
+    """    
     <style>
-        .header-logo {"https://drive.google.com/uc?export=download&id=1MDnGi2vlIc56UQCbJJIt_Zn1Iu-3wmzS"
+        .header-logo {"https://docs.google.com/uc?id=1BU8vr3jZVpIhhRwJmN6SMQh7NCQZcSy5"
             position: absolute;
             top: 10px;
             right: 25px;
