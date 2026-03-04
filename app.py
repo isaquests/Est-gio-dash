@@ -13,7 +13,7 @@ logo_url = "https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.
 st.markdown(
     """    
     <style>
-        .header-logo {"https://docs.google.com/uc?id=1BU8vr3jZVpIhhRwJmN6SMQh7NCQZcSy5"
+        .header-logo {"https://drive.google.com/uc?export=download&id=1BU8vr3jZVpIhhRwJmN6SMQh7NCQZcSy5"
             position: absolute;
             top: 10px;
             right: 25px;
