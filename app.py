@@ -64,6 +64,9 @@ df = pd.read_csv(url, sep=";")
 st.write("Amostra dos dados:")
 st.dataframe(df.head())
 
+clicked = st.button("Clique aqui")
+
+
 # 2. Indicadores gerais
 st.subheader("Indicadores Gerais📌")
 
@@ -142,5 +145,4 @@ df_filtrado = df[df["sistema_criacao"] == filtro_sistema]
 st.write(f"Produtores que usam o sistema: **{filtro_sistema}**")
 st.dataframe(df_filtrado)
 
-clicked = st.button("Clique aqui")
 
