@@ -13,7 +13,7 @@ logo_url = "https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.
 st.markdown(
     """
     <style>
-        .header-logo {
+        .header-logo {"https://drive.google.com/uc?export=download&id=1MDnGi2vlIc56UQCbJJIt_Zn1Iu-3wmzS"
             position: absolute;
             top: 10px;
             right: 25px;
@@ -57,7 +57,7 @@ st.markdown(
 st.subheader("Carregando Dados📥")
 
 #url = "https://drive.google.com/uc?id=1amRbo-F46eHp28K9SEGfS5vA3RlU70c3"     _db teste
-url = "https://drive.google.com/uc?export=download&id=1MDnGi2vlIc56UQCbJJIt_Zn1Iu-3wmzS"
+url = "https://docs.google.com/uc?id=1BU8vr3jZVpIhhRwJmN6SMQh7NCQZcSy5"
 
 df = pd.read_csv(url, sep=";")
 
