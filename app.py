@@ -59,7 +59,7 @@ st.subheader("Carregando Dados📥")
 #url = "https://drive.google.com/uc?id=1amRbo-F46eHp28K9SEGfS5vA3RlU70c3"     _db teste
 url = "https://docs.google.com/uc?id=1BU8vr3jZVpIhhRwJmN6SMQh7NCQZcSy5"
 
-df = pd.read_csv(url, sep=";")
+df = pd.read_csv(url, sep=",")
 
 st.write("Amostra dos dados:")
 st.dataframe(df.head())
