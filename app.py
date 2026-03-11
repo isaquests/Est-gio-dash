@@ -8,6 +8,22 @@ st.set_page_config(page_title="Dashboard Cooppras", layout="wide")
 logo_direita = "https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.png"
 logo_esquerda = "https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.png"
 
+col1, col2, col3 = st.columns([1,4,1])
+
+with col1:
+    st.image("https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.png", width=120)
+
+with col2:
+    st.markdown("<h1 style='text-align:center;'>DASHBOARD DOS PRODUTORES DE OVINOS</h1>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align:center;'>Análise econômica e produtiva da COOPIPRAS</p>", unsafe_allow_html=True)
+
+with col3:
+    st.image("https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.png", width=120)
+
+
+
+
+
 st.markdown(
     """
     <style>
