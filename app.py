@@ -1,148 +1,247 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
-import numpy as np
 import plotly.express as px
+import numpy as np
 
-# https://drive.google.com/uc?export=download&id=1MDnGi2vlIc56UQCbJJIt_Zn1Iu-3wmzS    colocar abaixo de style
+st.set_page_config(page_title="Dashboard Produtores", layout="wide")
 
-st.set_page_config(page_title="Dashboard Cooppras", layout="wide")
+st.title("📊 Dashboard dos Produtores")
 
-logo_url = "https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.png"
+# Upload do CSV
+# arquivo = st.file_uploader("Envie o CSV", type=["csv"])
 
-st.markdown(
-    """    
-    <style>
-        .header-logo {"https://drive.google.com/uc?export=download&id=1BU8vr3jZVpIhhRwJmN6SMQh7NCQZcSy5"
-            position: absolute;
-            top: 10px;
-            right: 25px;
-            width: 120px;
-            z-index: 100;
-        }
+arquivo = "https://docs.google.com/spreadsheets/d/1BU8vr3jZVpIhhRwJmN6SMQh7NCQZcSy5/edit?usp=drive_link&ouid=107842981311181038050&rtpof=true&sd=true"
 
-        .center-title {
-            text-align: center;
-            margin-top: 40px;
-            margin-bottom: 0px;
-        }
-        .main-title {
-            font-size: 52px !important;
-            font-weight: 900;
-            color: #1A4D8F;
-            margin-bottom: 0px;
-        }
-        .subtitle {
-            font-size: 24px;
-            color: #333;
-            margin-top: -5px;
-            margin-bottom: 30px;
-        }
-    </style>
+if arquivo is None:
+    st.stop()
 
-    <img src="https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.png" class="header-logo" />
+df = pd.read_csv(arquivo)
 
-    <div class="center-title">
-        <h1 class="main-title">DASHBORD DOS PRODUTORES DE OVINOS</h1>
-        <div class="subtitle">Análise econômica e produtiva da COOPIPRAS</div>
-    </div>
+# Limpar nomes das colunas
+df.columns = df.columns.str.strip()
 
-    <br>
-    """,
-    unsafe_allow_html=True
-)
+# -----------------------------
+# Limpeza dos dados numéricos
+# -----------------------------
 
-# 1. Carregar dados
+colunas_numericas = [
+    "idade",
+    "tempo_atuacao_anos",
+    "total_animais",
+    "partos_ano",
+    "receita_venda",
+    "custo_total_mes",
+    "custo_animal",
+    "custo_alimentacao",
+    "custo_sanidade",
+    "custo_energia",
+    "custo_agua",
+    "custo_transporte"
+]
 
-st.subheader("Carregando Dados📥")
+for col in colunas_numericas:
+    if col in df.columns:
+        df[col] = pd.to_numeric(df[col], errors="coerce")
 
-#url = "https://drive.google.com/uc?id=1amRbo-F46eHp28K9SEGfS5vA3RlU70c3"     _db teste
-url = 'https://docs.google.com/spreadsheets/d/1BU8vr3jZVpIhhRwJmN6SMQh7NCQZcSy5/export?format=csv'
+# -----------------------------
+# Indicadores principais da produção
+# -----------------------------
 
-df = pd.read_csv(url, sep=",")
-
-st.write("Amostra dos dados:")
-st.dataframe(df.head())
-
-clicked = st.button("Clique aqui")
-
-
-# 2. Indicadores gerais
-st.subheader("Indicadores Gerais📌")
+st.subheader("📌 Indicadores da Produção")
 
 col1, col2, col3, col4 = st.columns(4)
 
-col1.metric("Total de Cooperados", df.shape[0])
-col2.metric("Idade Média", int(df["idade"].mean()))
-col3.metric("Lucro Bruto Médio (R$)", round(df["lucro_bruto"].mean(), 2))
-col4.metric("Número Médio de Animais", int(df["quantidade_animais"].mean()))
+col1.metric(
+    "Idade média",
+    round(df["idade"].mean(), 1)
+)
 
+col2.metric(
+    "Tempo médio de atuação (anos)",
+    round(df["tempo_atuacao_anos"].mean(), 1)
+)
 
+col3.metric(
+    "Partos por ano",
+    round(df["partos_ano"].mean(), 1)
+)
 
-# 3. Distribuição de Sexo
-st.subheader("Distribuição por Sexo📊")
-fig = px.pie(df, names="sexo", title="Distribuição de Sexo")
+col4.metric(
+    "Custo médio por animal (R$)",
+    round(df["custo_animal"].mean(), 2)
+)
+
+# Indicador de média de animais por produtor
+col5 = st.columns(1)[0]
+
+col5.metric(
+    "Média de animais por produtor",
+    round(df["total_animais"].mean(), 1)
+)
+
+# -----------------------------
+# Seção de gráficos analíticos
+# -----------------------------
+
+st.divider()
+st.subheader("📊 Análises")
+
+col1, col2 = st.columns(2)
+
+# Gráfico de escolaridade dos produtores
+with col1:
+
+    if "escolaridade" in df.columns:
+
+        dados = df["escolaridade"].value_counts().reset_index()
+        dados.columns = ["escolaridade", "quantidade"]
+
+        fig1 = px.bar(
+            dados,
+            x="escolaridade",
+            y="quantidade",
+            title="Escolaridade dos Produtores",
+            text="quantidade"
+        )
+
+        st.plotly_chart(fig1, use_container_width=True)
+
+# Distribuição de lucratividade
+with col2:
+
+    if "lucratividade?" in df.columns:
+
+        dados = df["lucratividade?"].value_counts().reset_index()
+        dados.columns = ["lucratividade", "quantidade"]
+
+        fig2 = px.pie(
+            dados,
+            names="lucratividade",
+            values="quantidade",
+            title="Distribuição de Lucratividade"
+        )
+
+        st.plotly_chart(fig2, use_container_width=True)
+
+col3, col4 = st.columns(2)
+
+# Comparação de custos médios da produção
+with col3:
+
+    gastos_cols = [
+        "custo_agua",
+        "custo_energia",
+        "custo_alimentacao",
+        "custo_sanidade",
+        "custo_transporte"
+    ]
+
+    gastos_existentes = [g for g in gastos_cols if g in df.columns]
+
+    if gastos_existentes:
+
+        gastos_medios = df[gastos_existentes].mean().reset_index()
+        gastos_medios.columns = ["categoria", "valor"]
+
+        gastos_medios["categoria"] = gastos_medios["categoria"].str.replace("custo_", "")
+        gastos_medios["categoria"] = gastos_medios["categoria"].str.capitalize()
+
+        fig3 = px.bar(
+            gastos_medios,
+            x="valor",
+            y="categoria",
+            orientation="h",
+            title="Custos Médios",
+            text="valor"
+        )
+
+        st.plotly_chart(fig3, use_container_width=True)
+
+# Comparação entre receita média e custo médio
+with col4:
+
+    if "receita_venda" in df.columns and "custo_total_mes" in df.columns:
+
+        dados = pd.DataFrame({
+            "tipo": ["Receita média", "Custo médio"],
+            "valor": [
+                df["receita_venda"].mean(),
+                df["custo_total_mes"].mean()
+            ]
+        })
+
+        fig = px.bar(
+            dados,
+            x="tipo",
+            y="valor",
+            title="Receita média x Custo médio",
+            text="valor"
+        )
+
+        st.plotly_chart(fig, use_container_width=True)
+
+# -----------------------------
+# Tipo de comercialização da produção
+# -----------------------------
+
+st.subheader("📊 Tipo de Comercialização da Produção")
+
+comercializacao = df["destino"].value_counts().reset_index()
+comercializacao.columns = ["Tipo", "Quantidade"]
+
+fig = px.bar(
+    comercializacao,
+    x="Tipo",
+    y="Quantidade",
+    text="Quantidade",
+    color="Tipo"
+)
+
+fig.update_layout(
+    xaxis_title="Tipo de Comercialização",
+    yaxis_title="Quantidade de Produtores",
+    showlegend=False
+)
+
 st.plotly_chart(fig, use_container_width=True)
 
-# 4. Nível Tecnológico
-st.subheader("Nível Tecnológico dos Produtores⚙️")
-fig2 = px.histogram(
-    df,
-    x="nivel_tecnologico",
-    color="nivel_tecnologico",
-    title="Distribuição do Nível Tecnológico",
+# -----------------------------
+# Ranking das principais dificuldades
+# -----------------------------
+
+st.subheader("🏆 Ranking das Principais Dificuldades dos Produtores")
+
+ranking_dificuldades = (
+    df["dificuldades_enfrentadas"]
+    .value_counts()
+    .head(5)
+    .reset_index()
 )
-st.plotly_chart(fig2, use_container_width=True)
 
-# 5. Lucro Bruto por Sistema de Criação
-st.subheader("Lucro Bruto por Sistema de Criação💰")
+ranking_dificuldades.columns = ["Dificuldade", "Quantidade"]
 
-fig3 = px.box(
-    df,
-    x="sistema_criacao",
-    y="lucro_bruto",
-    color="sistema_criacao",
-    title="Comparação de Lucro por Sistema de Criação",
+fig = px.bar(
+    ranking_dificuldades,
+    x="Quantidade",
+    y="Dificuldade",
+    orientation="h",
+    text="Quantidade",
+    color="Quantidade"
 )
-st.plotly_chart(fig3, use_container_width=True)
 
-# 6. Correlação: Número de Animais x Lucro Bruto
-st.subheader("Dispersão: quantidade de animais vs lucro bruto📈")
-
-fig4 = px.scatter(
-    df,
-    x="quantidade_animais",
-    y="lucro_bruto",
-    trendline="ols",
-    title="Relação entre Número de Animais e Lucro",
+fig.update_layout(
+    xaxis_title="Número de Produtores",
+    yaxis_title="Dificuldade",
+    yaxis=dict(autorange="reversed")
 )
-st.plotly_chart(fig4, use_container_width=True)
 
-# 7. Gastos médios por categoria
-st.subheader("Composição dos Gastos Médios💸")
+st.plotly_chart(fig, use_container_width=True)
 
-gastos_cols = ["alimentacao", "remedio_vacina", "mao_de_obra", "energia", "agua", "transporte", "outros_gastos"]
+# -----------------------------
+# Tabela completa do dataset
+# -----------------------------
 
-gastos_medios = df[gastos_cols].mean().reset_index()
-gastos_medios.columns = ["categoria", "valor"]
+st.divider()
+st.subheader("📋 Dados completos")
 
-fig5 = px.bar(
-    gastos_medios,
-    x="categoria",
-    y="valor",
-    title="Gastos Médios por Categoria (R$)",
-)
-st.plotly_chart(fig5, use_container_width=True)
-
-# 8. Tabela filtrável
-
-st.subheader("Filtro dos Cooperados🔎")
-
-filtro_sistema = st.selectbox("Selecione o sistema de criação:", df["sistema_criacao"].unique())
-
-df_filtrado = df[df["sistema_criacao"] == filtro_sistema]
-
-st.write(f"Produtores que usam o sistema: **{filtro_sistema}**")
-st.dataframe(df_filtrado)
-
-
+st.dataframe(df)
