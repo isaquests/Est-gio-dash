@@ -3,20 +3,14 @@ import pandas as pd
 import plotly.express as px
 import numpy as np
 
-st.set_page_config(page_title="Dashboard Produtores", layout="wide")
-
-st.title("📊 Dashboard dos Produtores")
-
-
-st.write("VERSÃO TESTE 1")
-
-
 st.set_page_config(page_title="Dashboard Cooppras", layout="wide")
 
 logo_url = "https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.png"
 
 st.markdown(
     """
+    <img src="https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.png" class="header-logo" />
+
     <style>
         .header-logo {
             position: absolute;
