@@ -9,54 +9,54 @@ logo_direita = "https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_
 logo_esquerda = "https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.png"
 
 st.markdown(
-    f"""
+    """
     <style>
 
-    .header-container {{
+    .header-container {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-top: 20px;
-    }}
+        margin-top: 10px;
+    }
 
-    .logo-left {{
+    .logo-left {
         width: 120px;
-    }}
+    }
 
-    .logo-right {{
+    .logo-right {
         width: 120px;
-    }}
+    }
 
-    .title-container {{
+    .title-container {
         text-align: center;
         flex-grow: 1;
-    }}
+    }
 
-    .main-title {{
+    .main-title {
         font-size: 52px;
         font-weight: 900;
         color: #1A4D8F;
         margin-bottom: 0;
-    }}
+    }
 
-    .subtitle {{
+    .subtitle {
         font-size: 24px;
         color: #333;
         margin-top: -5px;
-    }}
+    }
 
     </style>
 
     <div class="header-container">
 
-        <img src="{logo_esquerda}" class="logo-left">
+        <img src="https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.png" class="logo-left">
 
         <div class="title-container">
             <h1 class="main-title">DASHBOARD DOS PRODUTORES DE OVINOS</h1>
             <div class="subtitle">Análise econômica e produtiva da COOPIPRAS</div>
         </div>
 
-        <img src="{logo_direita}" class="logo-right">
+        <img src="https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.png" class="logo-right">
 
     </div>
 
