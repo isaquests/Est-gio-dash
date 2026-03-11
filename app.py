@@ -8,8 +8,6 @@ st.set_page_config(page_title="Dashboard Produtores", layout="wide")
 st.title("📊 Dashboard dos Produtores")
 
 # Upload do CSV
-# arquivo = st.file_uploader("Envie o CSV", type=["csv"])
-
 arquivo = "https://docs.google.com/spreadsheets/d/1BU8vr3jZVpIhhRwJmN6SMQh7NCQZcSy5/export?format=csv&gid=622776986"
 
 if arquivo is None:
@@ -49,7 +47,7 @@ for col in colunas_numericas:
 
 st.subheader("📌 Indicadores da Produção")
 
-col1, col2, col3, col4 = st.columns(4)
+col1, col2, col3, col4, col5 = st.columns(5)
 
 col1.metric(
     "Idade média",
