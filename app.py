@@ -51,12 +51,12 @@ col1, col2, col3, col4, col5 = st.columns(5)
 
 col1.metric(
     "Idade média",
-    round(df["idade"].mean(), 1)
+    round(df["idade"].mean())
 )
 
 col2.metric(
     "Tempo médio de atuação (anos)",
-    round(df["tempo_atuacao_anos"].mean(), 1)
+    round(df["tempo_atuacao_anos"].mean())
 )
 
 col3.metric(
@@ -74,7 +74,7 @@ col4.metric(
 
 col5.metric(
     "Média de animais por produtor",
-    round(df["total_animais"].mean(), 1)
+    round(df["total_animais"].mean())
 )
 
 # -----------------------------
