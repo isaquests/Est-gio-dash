@@ -3,54 +3,67 @@ import pandas as pd
 import plotly.express as px
 import numpy as np
 
-<img src="https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.png" class="header-logo" />
-
 st.set_page_config(page_title="Dashboard Cooppras", layout="wide")
 
-logo_url = "https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.png"
+logo_direita = "https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.png"
+logo_esquerda = "https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.png"
 
 st.markdown(
-    """
+    f"""
     <style>
-        .header-logo {
-            position: absolute;
-            top: 10px;
-            right: 25px;
-            width: 120px;
-            z-index: 100;
-        }
 
-        .center-title {
-            text-align: center;
-            margin-top: 40px;
-            margin-bottom: 0px;
-        }
-        .main-title {
-            font-size: 52px !important;
-            font-weight: 900;
-            color: #1A4D8F;
-            margin-bottom: 0px;
-        }
-        .subtitle {
-            font-size: 24px;
-            color: #333;
-            margin-top: -5px;
-            margin-bottom: 30px;
-        }
+    .header-container {{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 20px;
+    }}
+
+    .logo-left {{
+        width: 120px;
+    }}
+
+    .logo-right {{
+        width: 120px;
+    }}
+
+    .title-container {{
+        text-align: center;
+        flex-grow: 1;
+    }}
+
+    .main-title {{
+        font-size: 52px;
+        font-weight: 900;
+        color: #1A4D8F;
+        margin-bottom: 0;
+    }}
+
+    .subtitle {{
+        font-size: 24px;
+        color: #333;
+        margin-top: -5px;
+    }}
+
     </style>
 
-    <img src="https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.png" class="header-logo" />
+    <div class="header-container">
 
-    <div class="center-title">
-        <h1 class="main-title">DASHBORD DOS PRODUTORES DE OVINOS</h1>
-        <div class="subtitle">Análise econômica e produtiva da COOPIPRAS</div>
+        <img src="{logo_esquerda}" class="logo-left">
+
+        <div class="title-container">
+            <h1 class="main-title">DASHBOARD DOS PRODUTORES DE OVINOS</h1>
+            <div class="subtitle">Análise econômica e produtiva da COOPIPRAS</div>
+        </div>
+
+        <img src="{logo_direita}" class="logo-right">
+
     </div>
 
     <br>
     """,
     unsafe_allow_html=True
 )
-
 
 # Upload do CSV
 arquivo = "https://docs.google.com/spreadsheets/d/1BU8vr3jZVpIhhRwJmN6SMQh7NCQZcSy5/export?format=csv&gid=622776986"
