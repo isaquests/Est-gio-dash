@@ -10,7 +10,7 @@ st.title("📊 Dashboard dos Produtores")
 # Upload do CSV
 # arquivo = st.file_uploader("Envie o CSV", type=["csv"])
 
-arquivo = "https://docs.google.com/spreadsheets/d/1BU8vr3jZVpIhhRwJmN6SMQh7NCQZcSy5/edit?usp=drive_link&ouid=107842981311181038050&rtpof=true&sd=true"
+arquivo = "https://docs.google.com/spreadsheets/d/1BU8vr3jZVpIhhRwJmN6SMQh7NCQZcSy5/export?format=csv&gid=622776986"
 
 if arquivo is None:
     st.stop()
