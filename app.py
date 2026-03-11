@@ -70,7 +70,7 @@ col4.metric(
 )
 
 # Indicador de média de animais por produtor
-col5 = st.columns(1)[0]
+# col5 = st.columns(1)[0]
 
 col5.metric(
     "Média de animais por produtor",
