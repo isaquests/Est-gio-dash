@@ -22,65 +22,6 @@ with col3:
 
 
 
-
-
-st.markdown(
-    """
-    <style>
-
-    .header-container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-top: 10px;
-    }
-
-    .logo-left {
-        width: 120px;
-    }
-
-    .logo-right {
-        width: 120px;
-    }
-
-    .title-container {
-        text-align: center;
-        flex-grow: 1;
-    }
-
-    .main-title {
-        font-size: 52px;
-        font-weight: 900;
-        color: #1A4D8F;
-        margin-bottom: 0;
-    }
-
-    .subtitle {
-        font-size: 24px;
-        color: #333;
-        margin-top: -5px;
-    }
-
-    </style>
-
-    <div class="header-container">
-
-        <img src="https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.png" class="logo-left">
-
-        <div class="title-container">
-            <h1 class="main-title">DASHBOARD DOS PRODUTORES DE OVINOS</h1>
-            <div class="subtitle">Análise econômica e produtiva da COOPIPRAS</div>
-        </div>
-
-        <img src="https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.png" class="logo-right">
-
-    </div>
-
-    <br>
-    """,
-    unsafe_allow_html=True
-)
-
 # Upload do CSV
 arquivo = "https://docs.google.com/spreadsheets/d/1BU8vr3jZVpIhhRwJmN6SMQh7NCQZcSy5/export?format=csv&gid=622776986"
 
