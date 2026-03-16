@@ -60,44 +60,45 @@ for col in colunas_numericas:
 # Indicadores principais da produção
 # -----------------------------
 
-st.subheader("📌 Indicadores da Produção")
+# st.subheader("📌 Indicadores da Produção")
 
-col1, col2, col3, col4, col5 = st.columns(5)
+with st.container():
 
-col1.metric(
-    "Idade média",
-    round(df["idade"].mean())
-)
+    col1, col2, col3, col4, col5 = st.columns(5)
 
-col2.metric(
-    "Tempo médio de atuação (anos)",
-    round(df["tempo_atuacao_anos"].mean())
-)
+    col1.metric(
+        "Idade média",
+        round(df["idade"].mean())
+    )
+    
+    col2.metric(
+        "Tempo médio de atuação (anos)",
+        round(df["tempo_atuacao_anos"].mean())
+    )
+    
+    col3.metric(
+        "Partos por ano",
+        round(df["partos_ano"].mean(), 1)
+    )
+    
+    col4.metric(
+        "Custo médio por animal (R$)",
+        round(df["custo_animal"].mean(), 2)
+    )
 
-col3.metric(
-    "Partos por ano",
-    round(df["partos_ano"].mean(), 1)
-)
-
-col4.metric(
-    "Custo médio por animal (R$)",
-    round(df["custo_animal"].mean(), 2)
-)
-
-# Indicador de média de animais por produtor
 # col5 = st.columns(1)[0]
-
-col5.metric(
-    "Média de animais por produtor",
-    round(df["total_animais"].mean())
-)
+    col5.metric(
+        "Média de animais por produtor",
+        round(df["total_animais"].mean())
+    )
 
 # -----------------------------
 # Seção de gráficos analíticos
 # -----------------------------
 
-st.divider()
-st.subheader("📊 Análises")
+# função que traça uma linha para dividir as coisas ==> st.divider()
+
+# st.subheader("📊 Análises")
 
 col1, col2 = st.columns(2)
 
