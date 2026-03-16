@@ -100,7 +100,7 @@ with st.container(border=True):
 
 # st.subheader("📊 Análises")
 with st.container(border=True):
-col1, col2 = st.columns(2)
+    col1, col2 = st.columns(2)
 
 # Gráfico de escolaridade dos produtores
 with col1:
