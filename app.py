@@ -62,8 +62,7 @@ for col in colunas_numericas:
 
 # st.subheader("📌 Indicadores da Produção")
 
-with st.container():
-
+container = st.container(border=true)
     col1, col2, col3, col4, col5 = st.columns(5)
 
     col1.metric(
@@ -198,7 +197,7 @@ with col4:
 # Tipo de comercialização da produção
 # -----------------------------
 
-st.subheader("📊 Tipo de Comercialização da Produção")
+# st.subheader("📊 Tipo de Comercialização da Produção")
 
 comercializacao = df["destino"].value_counts().reset_index()
 comercializacao.columns = ["Tipo", "Quantidade"]
@@ -223,7 +222,7 @@ st.plotly_chart(fig, use_container_width=True)
 # Ranking das principais dificuldades
 # -----------------------------
 
-st.subheader("🏆 Ranking das Principais Dificuldades dos Produtores")
+# st.subheader("🏆 Ranking das Principais Dificuldades dos Produtores")
 
 ranking_dificuldades = (
     df["dificuldades_enfrentadas"]
