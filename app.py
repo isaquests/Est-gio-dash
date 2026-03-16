@@ -166,9 +166,8 @@ with st.container(border=True):
     st.plotly_chart(fig, use_container_width=True)
 
 # Comparação de custos médios da produção
-with st.container(border=True):
-    with col3:
-    
+with col3:
+    with st.container(border=True):
         gastos_cols = [
             "custo_agua",
             "custo_energia",
@@ -199,9 +198,8 @@ with st.container(border=True):
             st.plotly_chart(fig3, use_container_width=True)
 
 # Comparação entre receita média e custo médio
-with st.container(border=True):
-    with col4:
-    
+with col4:
+    with st.container(border=True):
         if "receita_venda" in df.columns and "custo_total_mes" in df.columns:
     
             dados = pd.DataFrame({
@@ -259,6 +257,6 @@ with st.container(border=True):
 # -----------------------------
 
 # st.divider()
-st.subheader("📋 Dados completos")
+st.subheader("Dataset")
 
 st.dataframe(df)
