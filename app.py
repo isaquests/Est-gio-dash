@@ -62,7 +62,8 @@ for col in colunas_numericas:
 
 # st.subheader("📌 Indicadores da Produção")
 
-container = st.container(border=true)
+with st.container(border=True):
+
     col1, col2, col3, col4, col5 = st.columns(5)
 
     col1.metric(
