@@ -99,10 +99,10 @@ with st.container(border=True):
 # função que traça uma linha para dividir as coisas ==> st.divider()
 
 # st.subheader("📊 Análises")
+with st.container(border=True):
 col1, col2 = st.columns(2)
 
 # Gráfico de escolaridade dos produtores
-with st.container(border=True):
 with col1:
 
     if "escolaridade" in df.columns:
