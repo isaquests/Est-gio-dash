@@ -203,24 +203,24 @@ with st.container(border=True):
 
 # st.subheader("📊 Tipo de Comercialização da Produção")
 with st.container(border=True):
-comercializacao = df["destino"].value_counts().reset_index()
-comercializacao.columns = ["Tipo", "Quantidade"]
-
-fig = px.bar(
-    comercializacao,
-    x="Tipo",
-    y="Quantidade",
-    text="Quantidade",
-    color="Tipo"
-)
-
-fig.update_layout(
-    xaxis_title="Tipo de Comercialização",
-    yaxis_title="Quantidade de Produtores",
-    showlegend=False
-)
-
-st.plotly_chart(fig, use_container_width=True)
+    comercializacao = df["destino"].value_counts().reset_index()
+    comercializacao.columns = ["Tipo", "Quantidade"]
+    
+    fig = px.bar(
+        comercializacao,
+        x="Tipo",
+        y="Quantidade",
+        text="Quantidade",
+        color="Tipo"
+    )
+    
+    fig.update_layout(
+        xaxis_title="Tipo de Comercialização",
+        yaxis_title="Quantidade de Produtores",
+        showlegend=False
+    )
+    
+    st.plotly_chart(fig, use_container_width=True)
 
 # -----------------------------
 # Ranking das principais dificuldades
@@ -228,31 +228,31 @@ st.plotly_chart(fig, use_container_width=True)
 
 # st.subheader("🏆 Ranking das Principais Dificuldades dos Produtores")
 with st.container(border=True):
-ranking_dificuldades = (
-    df["dificuldades_enfrentadas"]
-    .value_counts()
-    .head(5)
-    .reset_index()
-)
-
-ranking_dificuldades.columns = ["Dificuldade", "Quantidade"]
-
-fig = px.bar(
-    ranking_dificuldades,
-    x="Quantidade",
-    y="Dificuldade",
-    orientation="h",
-    text="Quantidade",
-    color="Quantidade"
-)
-
-fig.update_layout(
-    xaxis_title="Número de Produtores",
-    yaxis_title="Dificuldade",
-    yaxis=dict(autorange="reversed")
-)
-
-st.plotly_chart(fig, use_container_width=True)
+    ranking_dificuldades = (
+        df["dificuldades_enfrentadas"]
+        .value_counts()
+        .head(5)
+        .reset_index()
+    )
+    
+    ranking_dificuldades.columns = ["Dificuldade", "Quantidade"]
+    
+    fig = px.bar(
+        ranking_dificuldades,
+        x="Quantidade",
+        y="Dificuldade",
+        orientation="h",
+        text="Quantidade",
+        color="Quantidade"
+    )
+    
+    fig.update_layout(
+        xaxis_title="Número de Produtores",
+        yaxis_title="Dificuldade",
+        yaxis=dict(autorange="reversed")
+    )
+    
+    st.plotly_chart(fig, use_container_width=True)
 
 # -----------------------------
 # Tabela completa do dataset
