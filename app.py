@@ -99,45 +99,46 @@ with st.container(border=True):
 # função que traça uma linha para dividir as coisas ==> st.divider()
 
 # st.subheader("📊 Análises")
-with st.container(border=True):
-    col1, col2 = st.columns(2)
+col1, col2 = st.columns(2)
 
 # Gráfico de escolaridade dos produtores
-with col1:
-
-    if "escolaridade" in df.columns:
-
-        dados = df["escolaridade"].value_counts().reset_index()
-        dados.columns = ["escolaridade", "quantidade"]
-
-        fig1 = px.bar(
-            dados,
-            x="escolaridade",
-            y="quantidade",
-            title="Escolaridade dos Produtores",
-            text="quantidade"
-        )
-
-        st.plotly_chart(fig1, use_container_width=True)
+with st.container(border=True):
+    with col1:
+    
+        if "escolaridade" in df.columns:
+    
+            dados = df["escolaridade"].value_counts().reset_index()
+            dados.columns = ["escolaridade", "quantidade"]
+    
+            fig1 = px.bar(
+                dados,
+                x="escolaridade",
+                y="quantidade",
+                title="Escolaridade dos Produtores",
+                text="quantidade"
+            )
+    
+            st.plotly_chart(fig1, use_container_width=True)
 
 # Distribuição de lucratividade
-with col2:
-
-    if "lucratividade?" in df.columns:
-
-        dados = df["lucratividade?"].value_counts().reset_index()
-        dados.columns = ["lucratividade", "quantidade"]
-
-        fig2 = px.pie(
-            dados,
-            names="lucratividade",
-            values="quantidade",
-            title="Distribuição de Lucratividade"
-        )
-
-        st.plotly_chart(fig2, use_container_width=True)
-
-col3, col4 = st.columns(2)
+with st.container(border=True):
+    with col2:
+    
+        if "lucratividade?" in df.columns:
+    
+            dados = df["lucratividade?"].value_counts().reset_index()
+            dados.columns = ["lucratividade", "quantidade"]
+    
+            fig2 = px.pie(
+                dados,
+                names="lucratividade",
+                values="quantidade",
+                title="Distribuição de Lucratividade"
+            )
+    
+            st.plotly_chart(fig2, use_container_width=True)
+    
+    col3, col4 = st.columns(2)
 
 # Comparação de custos médios da produção
 with col3:
