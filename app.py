@@ -99,10 +99,10 @@ with st.container(border=True):
 # função que traça uma linha para dividir as coisas ==> st.divider()
 
 # st.subheader("📊 Análises")
-col1, col2 = st.columns(2)
+with st.container(border=True):
+    col1, col2 = st.columns(2)
 
 # Gráfico de escolaridade dos produtores
-with st.container(border=True):
     with col1:
     
         if "escolaridade" in df.columns:
@@ -139,6 +139,31 @@ with st.container(border=True):
             st.plotly_chart(fig2, use_container_width=True)
     
     col3, col4 = st.columns(2)
+
+# -----------------------------
+# Tipo de comercialização da produção
+# -----------------------------
+
+# st.subheader("📊 Tipo de Comercialização da Produção")
+with st.container(border=True):
+    comercializacao = df["destino"].value_counts().reset_index()
+    comercializacao.columns = ["Tipo", "Quantidade"]
+    
+    fig = px.bar(
+        comercializacao,
+        x="Tipo",
+        y="Quantidade",
+        text="Quantidade",
+        color="Tipo"
+    )
+    
+    fig.update_layout(
+        xaxis_title="Tipo de Comercialização",
+        yaxis_title="Quantidade de Produtores",
+        showlegend=False
+    )
+    
+    st.plotly_chart(fig, use_container_width=True)
 
 # Comparação de custos médios da produção
 with st.container(border=True):
@@ -196,31 +221,6 @@ with st.container(border=True):
             )
     
             st.plotly_chart(fig, use_container_width=True)
-
-# -----------------------------
-# Tipo de comercialização da produção
-# -----------------------------
-
-# st.subheader("📊 Tipo de Comercialização da Produção")
-with st.container(border=True):
-    comercializacao = df["destino"].value_counts().reset_index()
-    comercializacao.columns = ["Tipo", "Quantidade"]
-    
-    fig = px.bar(
-        comercializacao,
-        x="Tipo",
-        y="Quantidade",
-        text="Quantidade",
-        color="Tipo"
-    )
-    
-    fig.update_layout(
-        xaxis_title="Tipo de Comercialização",
-        yaxis_title="Quantidade de Produtores",
-        showlegend=False
-    )
-    
-    st.plotly_chart(fig, use_container_width=True)
 
 # -----------------------------
 # Ranking das principais dificuldades
