@@ -141,66 +141,68 @@ with st.container(border=True):
     col3, col4 = st.columns(2)
 
 # Comparação de custos médios da produção
-with col3:
-
-    gastos_cols = [
-        "custo_agua",
-        "custo_energia",
-        "custo_alimentacao",
-        "custo_sanidade",
-        "custo_transporte"
-    ]
-
-    gastos_existentes = [g for g in gastos_cols if g in df.columns]
-
-    if gastos_existentes:
-
-        gastos_medios = df[gastos_existentes].mean().reset_index()
-        gastos_medios.columns = ["categoria", "valor"]
-
-        gastos_medios["categoria"] = gastos_medios["categoria"].str.replace("custo_", "")
-        gastos_medios["categoria"] = gastos_medios["categoria"].str.capitalize()
-
-        fig3 = px.bar(
-            gastos_medios,
-            x="valor",
-            y="categoria",
-            orientation="h",
-            title="Custos Médios",
-            text="valor"
-        )
-
-        st.plotly_chart(fig3, use_container_width=True)
+with st.container(border=True):
+    with col3:
+    
+        gastos_cols = [
+            "custo_agua",
+            "custo_energia",
+            "custo_alimentacao",
+            "custo_sanidade",
+            "custo_transporte"
+        ]
+    
+        gastos_existentes = [g for g in gastos_cols if g in df.columns]
+    
+        if gastos_existentes:
+    
+            gastos_medios = df[gastos_existentes].mean().reset_index()
+            gastos_medios.columns = ["categoria", "valor"]
+    
+            gastos_medios["categoria"] = gastos_medios["categoria"].str.replace("custo_", "")
+            gastos_medios["categoria"] = gastos_medios["categoria"].str.capitalize()
+    
+            fig3 = px.bar(
+                gastos_medios,
+                x="valor",
+                y="categoria",
+                orientation="h",
+                title="Custos Médios",
+                text="valor"
+            )
+    
+            st.plotly_chart(fig3, use_container_width=True)
 
 # Comparação entre receita média e custo médio
-with col4:
-
-    if "receita_venda" in df.columns and "custo_total_mes" in df.columns:
-
-        dados = pd.DataFrame({
-            "tipo": ["Receita média", "Custo médio"],
-            "valor": [
-                df["receita_venda"].mean(),
-                df["custo_total_mes"].mean()
-            ]
-        })
-
-        fig = px.bar(
-            dados,
-            x="tipo",
-            y="valor",
-            title="Receita média x Custo médio",
-            text="valor"
-        )
-
-        st.plotly_chart(fig, use_container_width=True)
+with st.container(border=True):
+    with col4:
+    
+        if "receita_venda" in df.columns and "custo_total_mes" in df.columns:
+    
+            dados = pd.DataFrame({
+                "tipo": ["Receita média", "Custo médio"],
+                "valor": [
+                    df["receita_venda"].mean(),
+                    df["custo_total_mes"].mean()
+                ]
+            })
+    
+            fig = px.bar(
+                dados,
+                x="tipo",
+                y="valor",
+                title="Receita média x Custo médio",
+                text="valor"
+            )
+    
+            st.plotly_chart(fig, use_container_width=True)
 
 # -----------------------------
 # Tipo de comercialização da produção
 # -----------------------------
 
 # st.subheader("📊 Tipo de Comercialização da Produção")
-
+with st.container(border=True):
 comercializacao = df["destino"].value_counts().reset_index()
 comercializacao.columns = ["Tipo", "Quantidade"]
 
@@ -225,7 +227,7 @@ st.plotly_chart(fig, use_container_width=True)
 # -----------------------------
 
 # st.subheader("🏆 Ranking das Principais Dificuldades dos Produtores")
-
+with st.container(border=True):
 ranking_dificuldades = (
     df["dificuldades_enfrentadas"]
     .value_counts()
@@ -256,7 +258,7 @@ st.plotly_chart(fig, use_container_width=True)
 # Tabela completa do dataset
 # -----------------------------
 
-st.divider()
+# st.divider()
 st.subheader("📋 Dados completos")
 
 st.dataframe(df)
