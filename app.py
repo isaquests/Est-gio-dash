@@ -95,156 +95,154 @@ with st.container(border=True):
 with st.container(border=True):
     col1, col2 = st.columns(2)
 
-# Gráfico de escolaridade dos produtores (GRÁFICO DE BARRA)
-with col1:
-    with st.container(border=True):
-        if "escolaridade" in df.columns:
+    # Gráfico de escolaridade dos produtores (GRÁFICO DE BARRA)
+    with col1:
+        with st.container(border=True):
+            if "escolaridade" in df.columns:
+        
+                dados = df["escolaridade"].value_counts().reset_index()
+                dados.columns = ["escolaridade", "quantidade"]
+        
+                fig1 = px.bar(
+                    dados,
+                    x="escolaridade",
+                    y="quantidade",
+                    title="Escolaridade dos Produtores",
+                    text="quantidade"
+                )
+        
+                st.plotly_chart(fig1, use_container_width=True)
     
-            dados = df["escolaridade"].value_counts().reset_index()
-            dados.columns = ["escolaridade", "quantidade"]
+    # Distribuição de lucratividade (GRÁFICO DE PIZZA)
+    with col2:
+        with st.container(border=True):
+            if "lucratividade?" in df.columns:
+        
+                dados = df["lucratividade?"].value_counts().reset_index()
+                dados.columns = ["lucratividade", "quantidade"]
+        
+                fig2 = px.pie(
+                    dados,
+                    names="lucratividade",
+                    values="quantidade",
+                    title="Distribuição de Lucratividade"
+                )
+        
+                st.plotly_chart(fig2, use_container_width=True)
+    # -------------------------------------------------------------------------
     
-            fig1 = px.bar(
-                dados,
-                x="escolaridade",
-                y="quantidade",
-                title="Escolaridade dos Produtores",
-                text="quantidade"
-            )
-    
-            st.plotly_chart(fig1, use_container_width=True)
-
-# Distribuição de lucratividade (GRÁFICO DE PIZZA)
-with col2:
-    with st.container(border=True):
-        if "lucratividade?" in df.columns:
-    
-            dados = df["lucratividade?"].value_counts().reset_index()
-            dados.columns = ["lucratividade", "quantidade"]
-    
-            fig2 = px.pie(
-                dados,
-                names="lucratividade",
-                values="quantidade",
-                title="Distribuição de Lucratividade"
-            )
-    
-            st.plotly_chart(fig2, use_container_width=True)
-# -------------------------------------------------------------------------
-
-# Comparação de custos médios da produção (GRÁFICO BARRA LATERAL)
-with st.container(border=True):
+    # Comparação de custos médios da produção (GRÁFICO BARRA LATERAL)
     col3, col4 = st.columns(2)
+        
+    with col3:
+        with st.container(border=True):
+            gastos_cols = [
+                "custo_agua",
+                "custo_energia",
+                "custo_alimentacao",
+                "custo_sanidade",
+                "custo_transporte"
+            ]
+        
+            gastos_existentes = [g for g in gastos_cols if g in df.columns]
+        
+            if gastos_existentes:
+        
+                gastos_medios = df[gastos_existentes].mean().reset_index()
+                gastos_medios.columns = ["categoria", "valor"]
+        
+                gastos_medios["categoria"] = gastos_medios["categoria"].str.replace("custo_", "")
+                gastos_medios["categoria"] = gastos_medios["categoria"].str.capitalize()
+        
+                fig3 = px.bar(
+                    gastos_medios,
+                    x="valor",
+                    y="categoria",
+                    orientation="h",
+                    title="Custos Médios",
+                    text="valor"
+                )
+        
+                st.plotly_chart(fig3, use_container_width=True)
     
-with col3:
-    with st.container(border=True):
-        gastos_cols = [
-            "custo_agua",
-            "custo_energia",
-            "custo_alimentacao",
-            "custo_sanidade",
-            "custo_transporte"
-        ]
+    # Comparação entre receita média x custo médio (GRÁFICO BARRA)
+    with col4:
+        with st.container(border=True):
+            if "receita_venda" in df.columns and "custo_total_mes" in df.columns:
+        
+                dados = pd.DataFrame({
+                    "tipo": ["Receita média", "Custo médio"],
+                    "valor": [
+                        df["receita_venda"].mean(),
+                        df["custo_total_mes"].mean()
+                    ]
+                })
+        
+                fig = px.bar(
+                    dados,
+                    x="tipo",
+                    y="valor",
+                    title="Receita média x Custo médio",
+                    text="valor"
+                )
+        
+                st.plotly_chart(fig, use_container_width=True)
+    # -----------------------------------------------------------------------------
     
-        gastos_existentes = [g for g in gastos_cols if g in df.columns]
     
-        if gastos_existentes:
-    
-            gastos_medios = df[gastos_existentes].mean().reset_index()
-            gastos_medios.columns = ["categoria", "valor"]
-    
-            gastos_medios["categoria"] = gastos_medios["categoria"].str.replace("custo_", "")
-            gastos_medios["categoria"] = gastos_medios["categoria"].str.capitalize()
-    
-            fig3 = px.bar(
-                gastos_medios,
-                x="valor",
-                y="categoria",
-                orientation="h",
-                title="Custos Médios",
-                text="valor"
-            )
-    
-            st.plotly_chart(fig3, use_container_width=True)
-
-# Comparação entre receita média x custo médio (GRÁFICO BARRA)
-with col4:
-    with st.container(border=True):
-        if "receita_venda" in df.columns and "custo_total_mes" in df.columns:
-    
-            dados = pd.DataFrame({
-                "tipo": ["Receita média", "Custo médio"],
-                "valor": [
-                    df["receita_venda"].mean(),
-                    df["custo_total_mes"].mean()
-                ]
-            })
-    
-            fig = px.bar(
-                dados,
-                x="tipo",
-                y="valor",
-                title="Receita média x Custo médio",
-                text="valor"
-            )
-    
-            st.plotly_chart(fig, use_container_width=True)
-# -----------------------------------------------------------------------------
-
-
-# Ranking das principais dificuldades
-with st.container(border=True):
+    # Ranking das principais dificuldades
     col5, col6 = st.columns(2)
+        
+    with col5:
+        with st.container(border=True):
+            ranking_dificuldades = (
+                df["dificuldades_enfrentadas"]
+                .value_counts()
+                .head(5)
+                .reset_index()
+            )
+            
+            ranking_dificuldades.columns = ["Dificuldade", "Quantidade"]
+            
+            fig = px.bar(
+                ranking_dificuldades,
+                x="Quantidade",
+                y="Dificuldade",
+                orientation="h",
+                text="Quantidade",
+                color="Quantidade"
+            )
+            
+            fig.update_layout(
+                xaxis_title="Número de Produtores",
+                yaxis_title="Dificuldade",
+                yaxis=dict(autorange="reversed")
+            )
+            
+            st.plotly_chart(fig, use_container_width=True)
     
-with col5:
-    with st.container(border=True):
-        ranking_dificuldades = (
-            df["dificuldades_enfrentadas"]
-            .value_counts()
-            .head(5)
-            .reset_index()
-        )
-        
-        ranking_dificuldades.columns = ["Dificuldade", "Quantidade"]
-        
-        fig = px.bar(
-            ranking_dificuldades,
-            x="Quantidade",
-            y="Dificuldade",
-            orientation="h",
-            text="Quantidade",
-            color="Quantidade"
-        )
-        
-        fig.update_layout(
-            xaxis_title="Número de Produtores",
-            yaxis_title="Dificuldade",
-            yaxis=dict(autorange="reversed")
-        )
-        
-        st.plotly_chart(fig, use_container_width=True)
-
-
-# Tipo de comercialização da produção (GRÁFICO DE BARRAS)
-with col6:
-    with st.container(border=True):
-        comercializacao = df["destino"].value_counts().reset_index()
-        comercializacao.columns = ["Tipo", "Quantidade"]
-        
-        fig = px.bar(
-            comercializacao,
-            x="Tipo",
-            y="Quantidade",
-            text="Quantidade",
-            color="Tipo"
-        )
-        
-        fig.update_layout(
-            xaxis_title="Tipo de Comercialização",
-            yaxis_title="Quantidade de Produtores",
-            showlegend=False
-        )
-        
-        st.plotly_chart(fig, use_container_width=True)
+    
+    # Tipo de comercialização da produção (GRÁFICO DE BARRAS)
+    with col6:
+        with st.container(border=True):
+            comercializacao = df["destino"].value_counts().reset_index()
+            comercializacao.columns = ["Tipo", "Quantidade"]
+            
+            fig = px.bar(
+                comercializacao,
+                x="Tipo",
+                y="Quantidade",
+                text="Quantidade",
+                color="Tipo"
+            )
+            
+            fig.update_layout(
+                xaxis_title="Tipo de Comercialização",
+                yaxis_title="Quantidade de Produtores",
+                showlegend=False
+            )
+            
+            st.plotly_chart(fig, use_container_width=True)
 #-------------------------------------------------------------------------------
 
 # Tabela completa do dataset
