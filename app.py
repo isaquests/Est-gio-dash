@@ -1,8 +1,11 @@
+# importanto as bibliotecas
 import streamlit as st
 import pandas as pd
 import plotly.express as px
 import numpy as np
+# ----------------------------------------------------------------
 
+# fazendo a parte de cima do dashboard
 st.set_page_config(page_title="Dashboard Cooppras", layout="wide")
 
 logo_direita = "https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.png"
@@ -19,23 +22,19 @@ with col2:
 
 with col3:
     st.image("https://cooppras.com.br/wp-content/uploads/2024/03/LOGO_OFICIAL_CDR.png", width=120)
-
+# ------------------------------------------------------------------------------
 
 
 # Upload do CSV
 arquivo = "https://docs.google.com/spreadsheets/d/1BU8vr3jZVpIhhRwJmN6SMQh7NCQZcSy5/export?format=csv&gid=622776986"
-
 if arquivo is None:
     st.stop()
 
 df = pd.read_csv(arquivo)
+# ------------------------------------------------------------------------------
 
-# Limpar nomes das colunas
+# Limpando nomes das colunas e dos dados numéricos
 df.columns = df.columns.str.strip()
-
-# -----------------------------
-# Limpeza dos dados numéricos
-# -----------------------------
 
 colunas_numericas = [
     "idade",
@@ -55,13 +54,10 @@ colunas_numericas = [
 for col in colunas_numericas:
     if col in df.columns:
         df[col] = pd.to_numeric(df[col], errors="coerce")
+# ---------------------------------------------------------------------
 
-# -----------------------------
+
 # Indicadores principais da produção
-# -----------------------------
-
-# st.subheader("📌 Indicadores da Produção")
-
 with st.container(border=True):
 
     col1, col2, col3, col4, col5 = st.columns(5)
@@ -86,25 +82,22 @@ with st.container(border=True):
         round(df["custo_animal"].mean(), 2)
     )
 
-# col5 = st.columns(1)[0]
     col5.metric(
         "Média de animais por produtor",
         round(df["total_animais"].mean())
     )
-
-# -----------------------------
-# Seção de gráficos analíticos
-# -----------------------------
-
+# ------------------------------------------------------------------------
+   
 # função que traça uma linha para dividir as coisas ==> st.divider()
 
-# st.subheader("📊 Análises")
+    
+# Colocando em 2 colunas os gráficos analíticos
 with st.container(border=True):
     col1, col2 = st.columns(2)
 
-# Gráfico de escolaridade dos produtores
-    with col1:
-    
+# Gráfico de escolaridade dos produtores (GRÁFICO DE BARRA)
+with col1:
+    with st.container(border=True):
         if "escolaridade" in df.columns:
     
             dados = df["escolaridade"].value_counts().reset_index()
@@ -120,10 +113,9 @@ with st.container(border=True):
     
             st.plotly_chart(fig1, use_container_width=True)
 
-# Distribuição de lucratividade
-with st.container(border=True):
-    with col2:
-    
+# Distribuição de lucratividade (GRÁFICO DE PIZZA)
+with col2:
+    with st.container(border=True):
         if "lucratividade?" in df.columns:
     
             dados = df["lucratividade?"].value_counts().reset_index()
@@ -136,36 +128,12 @@ with st.container(border=True):
                 title="Distribuição de Lucratividade"
             )
     
-            st.plotly_chart(fig2, use_container_width=True)
+            st.plotly_chart(fig2, use_container_width=False) # vê se tira o rótulo dos dados
     
     col3, col4 = st.columns(2)
+# -------------------------------------------------------------------------
 
-# -----------------------------
-# Tipo de comercialização da produção
-# -----------------------------
-
-# st.subheader("📊 Tipo de Comercialização da Produção")
-with st.container(border=True):
-    comercializacao = df["destino"].value_counts().reset_index()
-    comercializacao.columns = ["Tipo", "Quantidade"]
-    
-    fig = px.bar(
-        comercializacao,
-        x="Tipo",
-        y="Quantidade",
-        text="Quantidade",
-        color="Tipo"
-    )
-    
-    fig.update_layout(
-        xaxis_title="Tipo de Comercialização",
-        yaxis_title="Quantidade de Produtores",
-        showlegend=False
-    )
-    
-    st.plotly_chart(fig, use_container_width=True)
-
-# Comparação de custos médios da produção
+# Comparação de custos médios da produção (GRÁFICO BARRA LATERAL)
 with col3:
     with st.container(border=True):
         gastos_cols = [
@@ -197,7 +165,7 @@ with col3:
     
             st.plotly_chart(fig3, use_container_width=True)
 
-# Comparação entre receita média e custo médio
+# Comparação entre receita média x custo médio (GRÁFICO BARRA)
 with col4:
     with st.container(border=True):
         if "receita_venda" in df.columns and "custo_total_mes" in df.columns:
@@ -219,12 +187,10 @@ with col4:
             )
     
             st.plotly_chart(fig, use_container_width=True)
+# -----------------------------------------------------------------------------
 
-# -----------------------------
+
 # Ranking das principais dificuldades
-# -----------------------------
-
-# st.subheader("🏆 Ranking das Principais Dificuldades dos Produtores")
 with st.container(border=True):
     ranking_dificuldades = (
         df["dificuldades_enfrentadas"]
@@ -252,11 +218,31 @@ with st.container(border=True):
     
     st.plotly_chart(fig, use_container_width=True)
 
-# -----------------------------
+
+# Tipo de comercialização da produção (GRÁFICO DE BARRAS)
+with st.container(border=True):
+    comercializacao = df["destino"].value_counts().reset_index()
+    comercializacao.columns = ["Tipo", "Quantidade"]
+    
+    fig = px.bar(
+        comercializacao,
+        x="Tipo",
+        y="Quantidade",
+        text="Quantidade",
+        color="Tipo"
+    )
+    
+    fig.update_layout(
+        xaxis_title="Tipo de Comercialização",
+        yaxis_title="Quantidade de Produtores",
+        showlegend=False
+    )
+    
+    st.plotly_chart(fig, use_container_width=True)
+#-------------------------------------------------------------------------------
+
 # Tabela completa do dataset
-# -----------------------------
-
-# st.divider()
 st.subheader("Dataset")
-
 st.dataframe(df)
+
+    # fim algoritmo kkkkk
