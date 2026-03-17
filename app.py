@@ -128,12 +128,13 @@ with col2:
                 title="Distribuição de Lucratividade"
             )
     
-            st.plotly_chart(fig2, use_container_width=True) # vê se tira o rótulo dos dados
-    
-    col3, col4 = st.columns(2)
+            st.plotly_chart(fig2, use_container_width=True)
 # -------------------------------------------------------------------------
 
 # Comparação de custos médios da produção (GRÁFICO BARRA LATERAL)
+with st.container(border=True):
+    col3, col4 = st.columns(2)
+    
 with col3:
     with st.container(border=True):
         gastos_cols = [
@@ -192,53 +193,58 @@ with col4:
 
 # Ranking das principais dificuldades
 with st.container(border=True):
-    ranking_dificuldades = (
-        df["dificuldades_enfrentadas"]
-        .value_counts()
-        .head(5)
-        .reset_index()
-    )
+    col5, col6 = st.columns(2)
     
-    ranking_dificuldades.columns = ["Dificuldade", "Quantidade"]
-    
-    fig = px.bar(
-        ranking_dificuldades,
-        x="Quantidade",
-        y="Dificuldade",
-        orientation="h",
-        text="Quantidade",
-        color="Quantidade"
-    )
-    
-    fig.update_layout(
-        xaxis_title="Número de Produtores",
-        yaxis_title="Dificuldade",
-        yaxis=dict(autorange="reversed")
-    )
-    
-    st.plotly_chart(fig, use_container_width=True)
+with col5:
+    st.container(border=True):
+        ranking_dificuldades = (
+            df["dificuldades_enfrentadas"]
+            .value_counts()
+            .head(5)
+            .reset_index()
+        )
+        
+        ranking_dificuldades.columns = ["Dificuldade", "Quantidade"]
+        
+        fig = px.bar(
+            ranking_dificuldades,
+            x="Quantidade",
+            y="Dificuldade",
+            orientation="h",
+            text="Quantidade",
+            color="Quantidade"
+        )
+        
+        fig.update_layout(
+            xaxis_title="Número de Produtores",
+            yaxis_title="Dificuldade",
+            yaxis=dict(autorange="reversed")
+        )
+        
+        st.plotly_chart(fig, use_container_width=True)
 
 
 # Tipo de comercialização da produção (GRÁFICO DE BARRAS)
-with st.container(border=True):
-    comercializacao = df["destino"].value_counts().reset_index()
-    comercializacao.columns = ["Tipo", "Quantidade"]
-    
-    fig = px.bar(
-        comercializacao,
-        x="Tipo",
-        y="Quantidade",
-        text="Quantidade",
-        color="Tipo"
-    )
-    
-    fig.update_layout(
-        xaxis_title="Tipo de Comercialização",
-        yaxis_title="Quantidade de Produtores",
-        showlegend=False
-    )
-    
-    st.plotly_chart(fig, use_container_width=True)
+with col6:
+    st.container(border=True):
+        comercializacao = df["destino"].value_counts().reset_index()
+        comercializacao.columns = ["Tipo", "Quantidade"]
+        
+        fig = px.bar(
+            comercializacao,
+            x="Tipo",
+            y="Quantidade",
+            text="Quantidade",
+            color="Tipo"
+        )
+        
+        fig.update_layout(
+            xaxis_title="Tipo de Comercialização",
+            yaxis_title="Quantidade de Produtores",
+            showlegend=False
+        )
+        
+        st.plotly_chart(fig, use_container_width=True)
 #-------------------------------------------------------------------------------
 
 # Tabela completa do dataset
