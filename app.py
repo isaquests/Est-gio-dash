@@ -196,7 +196,7 @@ with st.container(border=True):
     col5, col6 = st.columns(2)
     
 with col5:
-    st.container(border=True):
+    with st.container(border=True):
         ranking_dificuldades = (
             df["dificuldades_enfrentadas"]
             .value_counts()
@@ -226,7 +226,7 @@ with col5:
 
 # Tipo de comercialização da produção (GRÁFICO DE BARRAS)
 with col6:
-    st.container(border=True):
+    with st.container(border=True):
         comercializacao = df["destino"].value_counts().reset_index()
         comercializacao.columns = ["Tipo", "Quantidade"]
         
