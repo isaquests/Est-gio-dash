@@ -128,7 +128,7 @@ with col2:
                 title="Distribuição de Lucratividade"
             )
     
-            st.plotly_chart(fig2, use_container_width=False) # vê se tira o rótulo dos dados
+            st.plotly_chart(fig2, use_container_width=True) # vê se tira o rótulo dos dados
     
     col3, col4 = st.columns(2)
 # -------------------------------------------------------------------------
