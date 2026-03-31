@@ -246,7 +246,7 @@ with st.container(border=True):
 #-------------------------------------------------------------------------------
 
 # Tabela completa do dataset
-st.subheader("Dataset")
-st.dataframe(df)
+# st.subheader("Dataset")
+# st.dataframe(df)
 
     # fim algoritmo kkkkk
